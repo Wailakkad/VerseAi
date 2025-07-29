@@ -61,7 +61,7 @@ const BarsGeniusLanding: React.FC = () => {
   const howItWorksAnimation = useScrollAnimation();
 
   return (
-    <div className="min-h-screen bg-[#000108] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#000108] text-white overflow-hidden">
       {/* Navigation */}
     <motion.nav 
         className={`absolute top-0 w-full z-[100] transition-all duration-300 ${
@@ -80,19 +80,23 @@ const BarsGeniusLanding: React.FC = () => {
             Barsgenius
           </motion.div>
           
-          <div className="hidden md:flex space-x-30">
-            {['Home', 'About', 'F&Q'].map((item) => (
-              <motion.a
-                key={item}
-                href="#"
-                className="text-gray-300 hover:text-white transition-colors relative group"
-                whileHover={{ scale: 1.05 }}
-              >
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 group-hover:w-full transition-all duration-300"></span>
-              </motion.a>
-            ))}
-          </div>
+   <div className="hidden md:flex space-x-30">
+  {[
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/pages/About' },
+    { label: 'F&Q', href: '/pages/FAQ' }
+  ].map((item) => (
+    <motion.div key={item.label} whileHover={{ scale: 1.05 }}>
+      <Link
+        href={item.href}
+        className="text-gray-300 hover:text-white transition-colors relative group"
+      >
+        {item.label}
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 group-hover:w-full transition-all duration-300"></span>
+      </Link>
+    </motion.div>
+  ))}
+</div>
           
           <Link href="/pages/verseAi">
               <motion.button
@@ -162,38 +166,7 @@ const BarsGeniusLanding: React.FC = () => {
           </motion.button>
           </Link>
 
-          {/* Laptop Mockup */}
-          {/* <motion.div 
-            variants={fadeInScale}
-            className="relative max-w-4xl mx-auto"
-          >
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-t-2xl p-8 shadow-2xl border border-gray-700">
-              <div className="flex space-x-2 mb-6">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              
-              <div className="bg-[#0b0b0f] rounded-lg p-6 border border-purple-500/30">
-                <h3 className="text-green-400 text-lg font-semibold mb-4">Generate your verse</h3>
-                <input
-                  type="text"
-                  placeholder="Custom Topic"
-                  value={customTopic}
-                  onChange={(e) => setCustomTopic(e.target.value)}
-                  className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mb-4"
-                />
-                <motion.button
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Generate
-                </motion.button>
-              </div>
-            </div>
-            <div className="bg-gradient-to-b from-gray-700 to-gray-800 h-8 rounded-b-2xl shadow-2xl"></div>
-          </motion.div> */}
+       
         </motion.div>
       </section>
 
@@ -510,11 +483,11 @@ const BarsGeniusLanding: React.FC = () => {
 
           {/* Simple Navigation */}
           <div className="flex items-center gap-8 text-sm">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+            <a href="/pages/About" className="text-gray-400 hover:text-white transition-colors duration-300">
               About
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              Contact
+            <a href="/" className="text-gray-400 hover:text-white transition-colors duration-300">
+              Fedbaak
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
               Privacy
