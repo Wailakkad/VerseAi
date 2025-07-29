@@ -485,7 +485,57 @@ const BarsGeniusLanding: React.FC = () => {
       </motion.section>
 
       {/* Footer space */}
-      <div className="h-20"></div>
+      <motion.footer 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={fadeInUp}
+      className="bg-gradient-to-b from-black to-gray-900 border-t border-purple-500/20 relative overflow-hidden"
+    >
+      {/* Subtle background glow */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-32 bg-purple-500/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-8 py-12">
+        {/* Main Footer Content */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Brand */}
+          <div className="flex items-center gap-3">
+            <img src="/favicon.png" alt="" className='w-22 h-22' />
+            <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">
+              BarsGenius
+            </h3>
+          </div>
+
+          {/* Simple Navigation */}
+          <div className="flex items-center gap-8 text-sm">
+            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              About
+            </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              Contact
+            </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              Privacy
+            </a>
+          </div>
+
+          {/* MVP Status */}
+          <div className="flex items-center gap-2 text-sm">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-gray-400">MVP Live</span>
+          </div>
+        </div>
+
+        {/* Bottom Line */}
+        <div className="mt-8 pt-6 border-t border-gray-800 text-center">
+          <p className="text-gray-400 text-sm">
+            © 2025 BarsGenius. AI-powered rap verse generation. Made for the culture.
+          </p>
+        </div>
+      </div>
+    </motion.footer>
     </div>
   );
 };

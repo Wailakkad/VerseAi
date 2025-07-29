@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 export default function BarsGeniusApp() {
 
@@ -134,9 +135,12 @@ export default function BarsGeniusApp() {
         {/* Header */}
         <header className="flex justify-between items-center p-8">
           <h1 className="text-white text-3xl font-bold">Barsgenius</h1>
+          <Link href="/pages/tuturial" >
+           
           <button className="px-6 py-2 bg-green-500 hover:bg-green-400 text-white rounded-full font-medium transition-all duration-200 shadow-lg shadow-green-500/25">
             Tutorial
           </button>
+          </Link>
         </header>
 
         {/* Error message */}
