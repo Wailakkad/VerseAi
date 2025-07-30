@@ -3,6 +3,40 @@ import React from 'react';
 import { ArrowRight, Mic, Palette, Zap, Clock, Target, Shield } from 'lucide-react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
+// Add this component before your main About component
+const ScrollReveal = ({ children, delay = 0, direction = "up" }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: direction === "up" ? 80 : direction === "down" ? -80 : 0,
+      x: direction === "left" ? 80 : direction === "right" ? -80 : 0,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+    },
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={variants}
+      transition={{
+        duration: 0.8,
+        delay: delay,
+        ease: "easeOut",
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const About: React.FC = () => {
   return (
@@ -19,7 +53,7 @@ const About: React.FC = () => {
           <div className="max-w-6xl mx-auto text-center">
             <motion.div  initial={{ opacity : 0, y:100}} animate={{ opacity : 1, y:0}} transition={{ duration: 1, ease: "easeOut" }} className="mb-8">
                <motion.h1 
-        className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight tracking-tight"
+        className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-black bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight tracking-tight"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
@@ -64,25 +98,30 @@ const About: React.FC = () => {
         {/* Mission Section */}
         <section className="py-32 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
-            <div className="relative">
+            <ScrollReveal delay={0.2}>
+              <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 blur-3xl rounded-full"></div>
               <h2 className="relative text-4xl sm:text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
                 Our Mission
               </h2>
             </div>
-            <p className="text-2xl sm:text-3xl md:text-4xl text-gray-300 leading-relaxed font-light max-w-5xl mx-auto">
+            </ScrollReveal>
+            <ScrollReveal delay={0.4}>
+              <p className="text-2xl sm:text-3xl md:text-4xl text-gray-300 leading-relaxed font-light max-w-5xl mx-auto">
               We believe every rapper deserves a creative partner — one that{' '}
               <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent font-medium">never sleeps</span>,{' '}
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent font-medium">never blocks</span>, and{' '}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-medium">always spits fire</span>.
             </p>
+            </ScrollReveal>
           </div>
         </section>
 
         {/* How It Works Section */}
         <section className="py-32 px-4 sm:px-6 lg:px-8" id="how-it-works">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20">
+            <ScrollReveal>
+              <div className="text-center mb-20">
               <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 How It Works
               </h2>
@@ -90,6 +129,7 @@ const About: React.FC = () => {
                 Three simple steps to transform your ideas into fire verses
               </p>
             </div>
+            </ScrollReveal>
 
             <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
               {[
@@ -115,7 +155,8 @@ const About: React.FC = () => {
                   gradient: "from-cyan-500 to-purple-500"
                 }
               ].map((item, index) => (
-                <div key={index} className="group relative">
+              <ScrollReveal key={index} delay={index * 0.2} direction={index % 2 === 0 ? "up" : "down"}>
+                  <motion.div key={index} className="group relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                   <div className="relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-10 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 hover:-translate-y-2">
                     <div className="mb-8">
@@ -133,7 +174,8 @@ const About: React.FC = () => {
                       {item.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
