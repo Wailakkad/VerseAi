@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 import { ArrowRight, Mic, Palette, Zap, Clock, Target, Shield } from 'lucide-react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+
 
 const About: React.FC = () => {
   return (
@@ -15,35 +17,47 @@ const About: React.FC = () => {
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
-            <div className="mb-8">
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight tracking-tight">
-                AI-Powered Rap.
-                <span className="block bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  Instantly.
-                </span>
-              </h1>
-            </div>
+            <motion.div  initial={{ opacity : 0, y:100}} animate={{ opacity : 1, y:0}} transition={{ duration: 1, ease: "easeOut" }} className="mb-8">
+               <motion.h1 
+        className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight tracking-tight"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+      >
+        AI-Powered Rap.
+        <motion.span 
+          className="block bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+        >
+          Instantly.
+        </motion.span>
+      </motion.h1>
+            </motion.div>
             
-            <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
+            <motion.p initial={{ opacity  : 0 , y : 30 }} animate={{ opacity: 1 , y: 0}} transition={{ duration : 2 , delay : 0.4 , ease : "easeOut" }} className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
               VerseAI helps artists write complete rap lyrics in seconds — just drop your first bar, pick your vibe, and let the AI take over.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button onClick={ () => window.location.href = '/pages/verseAi' } className="group relative px-12 py-5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl text-xl font-bold shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+            <motion.div initial={{ opacity: 0 , y : 30 }} animate={{ opacity : 1 , y : 0 }} transition={{ duration : 2.05 , delay : 0.6, ease : "easeOut"}} className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <motion.button whileHover={{ scale : 1.05 , y : -4 }} whileTap={{ scale : 0.98 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}   onClick={ () => window.location.href = '/pages/verseAi' } className="group relative px-12 py-5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl text-xl font-bold shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300  hover:-translate-y-1">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
                 <span className="relative flex items-center gap-3">
                   Start Freestyling
-                  <Mic className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                  <motion.div whileHover={{ rotate: 360 }} transition={{duration : 0.3}} className="flex items-center justify-center">
+                     <Mic className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                  </motion.div>
                 </span>
-              </button>
+              </motion.button>
               
-              <button onClick={ () => window.location.href = '/pages/tuturial' } className="group px-12 py-5 border-2 border-gray-600 rounded-2xl text-xl font-bold hover:border-purple-400 hover:bg-purple-400/10 transition-all duration-300 hover:scale-105">
+              <motion.button whileHover={{scale : 1.05}} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={ () => window.location.href = '/pages/tuturial' } className="group px-12 py-5 border-2 border-gray-600 rounded-2xl text-xl font-bold hover:border-purple-400 hover:bg-purple-400/10 transition-all duration-300 hover:scale-105">
                 <span className="flex items-center gap-3">
                   See How It Works
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                  <motion.div whileHover={{ x : 4 }} transition={{duration : 0.3}}><ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" /></motion.div>
                 </span>
-              </button>
-            </div>v
+              </motion.button>
+            </motion.div>
           </div>
         </section>
 
