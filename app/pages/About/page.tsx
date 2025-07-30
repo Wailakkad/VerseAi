@@ -3,8 +3,13 @@ import React from 'react';
 import { ArrowRight, Mic, Palette, Zap, Clock, Target, Shield } from 'lucide-react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
-// Add this component before your main About component
-const ScrollReveal = ({ children, delay = 0, direction = "up" }) => {
+type ScrollRevealProps = {
+  delay?: number;
+  direction?: "up" | "down" | "left" | "right";
+  children: React.ReactNode;
+};
+
+const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, delay = 0, direction = "up" }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
